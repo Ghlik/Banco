@@ -80,6 +80,67 @@ public class TicTacToe {
 
     public static void main(String[] args)
     {
-       
+        Scanner in = new Scanner(System.in);
+        coluna = new String[9];
+        jogada = "X";
+        String vencedor = null;
+
+        for (int a = 0; a < 9; a++) {
+            coluna[a] = String.valueOf(a + 1);
+        }
+
+        System.out.println("Jogo da Velha");
+        printBoard();
+
+        System.out.println(
+                "Jogador X, joga primeiro. Insira o espaço desejado para " + jogada + " no tabuleiro:");
+
+        while (vencedor == null) {
+            int numInput;
+
+            try {
+                numInput = in.nextInt();
+                if (!(numInput > 0 && numInput <= 9)) {
+                    System.out.println(
+                            "Comando inválido; Insira o espaço desejado:");
+                    continue;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println(
+                        "Comando inválido; Insira o espaço desejado:");
+                continue;
+            }
+
+
+            if (coluna[numInput - 1].equals(
+                    String.valueOf(numInput))) {
+                coluna[numInput - 1] = jogada;
+
+                if (jogada.equals("X")) {
+                    jogada = "O";
+                }
+                else {
+                    jogada = "X";
+                }
+
+                printBoard();
+                vencedor = verificarVencedor();
+            }
+            else {
+                System.out.println(
+                        "Este espaço ja está ocupado; insira o espaço desejado:");
+            }
+        }
+
+        if (vencedor.equalsIgnoreCase("Velha")) {
+            System.out.println("Deu velha");
+        }
+
+        else {
+            System.out.println(
+                    "Parabéns! " + vencedor + " Você ganhou!");
+        }
+        in.close();
     }
 }
