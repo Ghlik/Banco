@@ -17,19 +17,19 @@ public class Banco {
 
         Scanner scan = new Scanner(System.in);
 
-        Conta c1 = new Conta();
+        Conta contaExemplo = new Conta();
 
-        c1.saldo = 12000;
+        contaExemplo.saldo = 12000;
 
-        c1.numConta = "8569";
-        c1.agencia = "02";
+        contaExemplo.numConta = "8569";
+        contaExemplo.agencia = "02";
 
         Cliente usuario = new Cliente();
 
         usuario.nome = "Pedro Guilherme";
         usuario.categoriaPerfil = "Gold";
 
-        usuario.conta = c1;
+        usuario.conta = contaExemplo;
 
         int escolha = -1;
 
@@ -42,16 +42,17 @@ public class Banco {
             System.out.println("0 - Finalizar sessão.");
             System.out.print("Realizar operação: ");
             escolha = scan.nextInt();
+            System.out.println();
 
             if (escolha == 1){
-                System.out.println("Você sacou R$500 da sua conta, seu novo saldo é: " + (c1.saldo -= 500));
+                System.out.println("Você sacou R$500 da sua conta, seu novo saldo é: " + (contaExemplo.saldo -= 500));
 
             } else if (escolha == 2) {
-                System.out.println("Você depositou R$500 da sua conta, seu novo saldo é:" + (c1.saldo += 500));
+                System.out.println("Você depositou R$500 da sua conta, seu novo saldo é:" + (contaExemplo.saldo += 500));
 
             } else if (escolha == 3) {
-                System.out.println("Seu saldo é:" + c1.saldo);
+                System.out.println("Seu saldo é:" + contaExemplo.saldo);
             }
         }
-}
+    }
 }
