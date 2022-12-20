@@ -61,4 +61,25 @@ public class TicTacToe {
         return null;
     }
 
+    static void printBoard()
+    {
+        System.out.println("|-----------|");
+        System.out.println("| " + coluna[0] + " | "
+                + coluna[1] + " | " + coluna[2]
+                + " |");
+
+        System.out.println("| " + coluna[3] + " | "
+                + coluna[4] + " | " + coluna[5]
+                + " |");
+
+        System.out.println("| " + coluna[6] + " | "
+                + coluna[7] + " | " + coluna[8]
+                + " |");
+        System.out.println("|-----------|");
+    }
+
+    public static void main(String[] args)
+    {
+       
+    }
 }
