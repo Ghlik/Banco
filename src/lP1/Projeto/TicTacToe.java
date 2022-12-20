@@ -3,6 +3,83 @@ package lP1.Projeto;
 import java.util.*;
 
 public class TicTacToe {
+    public void jogoDavelha() {
+        Scanner in = new Scanner(System.in);
+        coluna = new String[9];
+        jogada = "X";
+        String vencedor = null;
+
+        for (int a = 0; a < 9; a++) {
+            coluna[a] = String.valueOf(a + 1);
+        }
+
+        System.out.println("Jogo da Velha");
+        tabuleiro();
+
+        System.out.println(
+                "Jogador X, joga primeiro. Insira o espaço desejado para " + jogada + " no tabuleiro:");
+
+        while (vencedor == null) {
+            int numInput;
+
+            try {
+                numInput = in.nextInt();
+                if (!(numInput > 0 && numInput <= 9)) {
+                    System.out.println(
+                            "Comando inválido; Insira o espaço desejado:");
+                    continue;
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println(
+                        "Comando inválido; Insira o espaço desejado:");
+                continue;
+            }
+
+
+            if (coluna[numInput - 1].equals(
+                    String.valueOf(numInput))) {
+                coluna[numInput - 1] = jogada;
+
+                if (jogada.equals("X")) {
+                    jogada = "O";
+                }
+                else {
+                    jogada = "X";
+                }
+
+                tabuleiro();
+                vencedor = verificarVencedor();
+            }
+            else {
+                System.out.println(
+                        "Este espaço ja está ocupado; insira o espaço desejado:");
+            }
+        }
+
+        if (vencedor.equalsIgnoreCase("Velha")) {
+            System.out.println("Que pena, deu velha");
+
+            System.out.println("Deseja jogar novamente? Digite 1 para sim ou 0 para nao");
+            int jogarNovamente = in.nextInt();
+            if (jogarNovamente == 1) {
+                jogoDavelha();
+            }
+
+        }
+
+        else {
+            System.out.println(
+                    "Parabéns! " + vencedor + " Você ganhou!");
+
+            System.out.println("Deseja jogar novamente? Digite 1 para sim ou 0 para nao");
+            int jogarNovamente = in.nextInt();
+            if (jogarNovamente == 1) {
+                jogoDavelha();
+            }
+        }
+        in.close();
+    }
     static String[] coluna;
     static String jogada;
 
@@ -61,7 +138,7 @@ public class TicTacToe {
         return null;
     }
 
-    static void printBoard()
+    static void tabuleiro()
     {
         System.out.println("|-----------|");
         System.out.println("| " + coluna[0] + " | "
@@ -80,67 +157,6 @@ public class TicTacToe {
 
     public static void main(String[] args)
     {
-        Scanner in = new Scanner(System.in);
-        coluna = new String[9];
-        jogada = "X";
-        String vencedor = null;
-
-        for (int a = 0; a < 9; a++) {
-            coluna[a] = String.valueOf(a + 1);
-        }
-
-        System.out.println("Jogo da Velha");
-        printBoard();
-
-        System.out.println(
-                "Jogador X, joga primeiro. Insira o espaço desejado para " + jogada + " no tabuleiro:");
-
-        while (vencedor == null) {
-            int numInput;
-
-            try {
-                numInput = in.nextInt();
-                if (!(numInput > 0 && numInput <= 9)) {
-                    System.out.println(
-                            "Comando inválido; Insira o espaço desejado:");
-                    continue;
-                }
-            }
-            catch (InputMismatchException e) {
-                System.out.println(
-                        "Comando inválido; Insira o espaço desejado:");
-                continue;
-            }
-
-
-            if (coluna[numInput - 1].equals(
-                    String.valueOf(numInput))) {
-                coluna[numInput - 1] = jogada;
-
-                if (jogada.equals("X")) {
-                    jogada = "O";
-                }
-                else {
-                    jogada = "X";
-                }
-
-                printBoard();
-                vencedor = verificarVencedor();
-            }
-            else {
-                System.out.println(
-                        "Este espaço ja está ocupado; insira o espaço desejado:");
-            }
-        }
-
-        if (vencedor.equalsIgnoreCase("Velha")) {
-            System.out.println("Deu velha");
-        }
-
-        else {
-            System.out.println(
-                    "Parabéns! " + vencedor + " Você ganhou!");
-        }
-        in.close();
+        new TicTacToe().jogoDavelha();
     }
 }
